@@ -2,19 +2,25 @@ import { NgModule } from '@angular/core';
 import {
   MatToolbarModule,
   MatButtonModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule
 
   } from '@angular/material';
 @NgModule({
   imports: [
     MatToolbarModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatToolbarModule
+
   ],
   exports: [
     MatToolbarModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatToolbarModule
   ],
   declarations: []
 })
