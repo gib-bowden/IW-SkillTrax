@@ -5,16 +5,14 @@ import { DataSource } from '@angular/cdk/table';
 
 
 @Injectable()
-export class EventService {
+export class EmployeeListService {
 
-    getEmployee(): Observable<Employee[]> {
-        const rows = [];
-        data.forEach(employee => rows.push(employee, { detailRow: true, employee }));
-        console.log(rows);
-        return of(rows);
-      }
-    
-      disconnect() { }
+    getEmployees(): Observable<Employee[]> {
+      const rows = [];
+      data.forEach(employee => rows.push(employee, { detailRow: true, employee }));
+      console.log(rows);
+      return of(rows);
+    }
 }
 
 const data: Employee[] = [

@@ -11,6 +11,7 @@ import { NavbarComponent } from './nav/navbar/navbar.component';
 import { MaterialModule } from './material/material.module';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
+import { EmployeeListService } from './employees/services/employee-list.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { EmployeeDetailComponent } from './employees/employee-detail/employee-de
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EmployeeListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
