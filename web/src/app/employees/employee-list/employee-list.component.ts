@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component} from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, Subject, of } from 'rxjs';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
-  selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
   animations: [
@@ -15,131 +13,68 @@ import { Observable, Subject, of } from 'rxjs';
       state('expanded', style({ height: '*', visibility: 'visible' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
-  ]
+  ],
 })
-export class EmployeeListComponent implements OnInit {
-
-  displayedColumns = ['name', 'role', 'analytics', 'technology', 'management', 'certCount'];
-  dataSource = new EmployeeDataSource();
+export class EmployeeListComponent {
+  displayedColumns = ['position', 'name', 'weight'];
+  dataSource = new ExampleDataSource();
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
-  expandedEmployee: any;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  expandedElement: any;
 }
 
-export interface Skill {
+export interface Element {
   name: string;
-  type: string;
-  solution: string;
-  isExpert: boolean;
+  position: number;
+  weight: number;
+  symbol: string;
 }
 
-export interface Cert {
-  name: string;
-  org: string;
-}
-
-export interface Employee {
-  employeeId: number;
-  employeeName: string;
-  role: string;
-  hasManagement: boolean;
-  hasAnalytics: boolean;
-  hasTechnology: boolean;
-  certCount: number;
-  skills: Skill[];
-  certs: Cert[];
-}
-
-const data: Employee[] = [
-  {
-    "employeeId": 123,
-    "employeeName": "Gib Bowden",
-    "role": "Consultant",
-    "hasManagement": true,
-    "hasAnalytics": true,
-    "hasTechnology": true,
-    "certCount": 2,
-    "skills": [
-      {
-        "name": "Requirements",
-        "type": "BA work",
-        "solution": "Management",
-        "isExpert": true
-      },
-      {
-        "name": "other shit",
-        "type": "application",
-        "solution": "Analytics",
-        "isExpert": false
-      }
-    ],
-    "certs": [
-      {
-        "name": "Certified Shit",
-        "org": "PMI"
-      },
-      {
-        "name": "other cert",
-        "org": "BSA"
-      }
-    ]
-  },
-  {
-    "employeeId": 124,
-    "employeeName": "John Doe",
-    "role": "Consultant",
-    "hasManagement": false,
-    "hasAnalytics": false,
-    "hasTechnology": true,
-    "certCount": 3,
-    "skills": [
-      {
-        "name": "Dumb Shit 1",
-        "type": "BA work",
-        "solution": "Technology",
-        "isExpert": true
-      },
-      {
-        "name": "other shit 2",
-        "type": "application",
-        "solution": "Technology",
-        "isExpert": false
-      }
-    ],
-    "certs": [
-      {
-        "name": "Certified Shit",
-        "org": "PMI"
-      },
-      {
-        "name": "other cert",
-        "org": "BSA"
-      },
-      {
-        "name": "scum master",
-        "org": "CSC"
-      }
-    ]
-  }
+const data: Element[] = [
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
+  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
+  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
+  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
+  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
+  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
+  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
+  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
+  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
+  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
 ];
 
-
-export class EmployeeDataSource extends DataSource<any> {
-
-  paginator: MatPaginator;
+/**
+ * Data source to provide what data should be rendered in the table. The observable provided
+ * in connect should emit exactly the data that should be rendered by the table. If the data is
+ * altered, the observable should emit that new set of data on the stream. In our case here,
+ * we return a stream that contains only one set of data that doesn't change.
+ */
+export class ExampleDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Employee[]> {
+  connect(): Observable<Element[]> {
     const rows = [];
-    data.forEach(employee => rows.push(employee, { detailRow: true, employee }));
+    data.forEach(element => rows.push(element, { detailRow: true, element }));
     console.log(rows);
     return of(rows);
   }
 
   disconnect() { }
 }
+
+
+
+
+
+
+  
+  

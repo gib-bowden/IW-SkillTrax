@@ -10,12 +10,14 @@ import { appRoutes } from './routes';
 import { NavbarComponent } from './nav/navbar/navbar.component';
 import { MaterialModule } from './material/material.module';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
+import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule,
