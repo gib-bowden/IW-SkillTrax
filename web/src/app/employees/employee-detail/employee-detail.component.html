@@ -1,3 +1,33 @@
-<p>
-  {{employee.employeeId}}
-</p>
+<mat-button-toggle-group #group="matButtonToggleGroup" (change)="getToggleValues(group.value)" multiple>
+    <mat-button-toggle *ngIf="employee.hasAnalytics" value="analytics">
+      Analytics
+    </mat-button-toggle>
+    <mat-button-toggle *ngIf="employee.hasManagement" value="management">
+      Management
+    </mat-button-toggle>
+    <mat-button-toggle *ngIf="employee.hasTechnology" value="technology">
+      Technology
+    </mat-button-toggle>
+    <mat-button-toggle *ngIf="employee.certCount > 0" value="certs">
+      Certifications
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <div class="example-selected-value">Selected value: {{group.value}}{{employee.employeeId}}</div>
+  <mat-list>
+      <h3 matSubheader>Skills</h3>
+      <mat-list-item>
+         <mat-icon matListIcon>folder</mat-icon>
+         <h4 matLine>{{employee.employeeName}}</h4>
+         <p matLine class="demo-2"> {{employee.role}} </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Certifications</h3>
+      <mat-list-item>
+         <mat-icon matListIcon>note</mat-icon>
+         <h4 matLine>{{employee.employeeId}}</h4>
+         <p matLine class="demo-2"> {{employee.certCount}} </p>
+      </mat-list-item>
+   </mat-list>
+
+
+   <!-- *ngFor="let folder of folders" -->

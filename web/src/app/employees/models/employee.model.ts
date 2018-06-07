@@ -9,6 +9,4 @@ export interface Employee {
     hasAnalytics: boolean;
     hasTechnology: boolean;
     certCount: number;
-    skills: Skill[];
-    certs: Cert[];
   }

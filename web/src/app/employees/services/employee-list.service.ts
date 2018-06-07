@@ -24,30 +24,7 @@ const data: Employee[] = [
       "hasAnalytics": true,
       "hasTechnology": true,
       "certCount": 2,
-      "skills": [
-        {
-          "name": "Requirements",
-          "type": "BA work",
-          "solution": "Management",
-          "isExpert": true
-        },
-        {
-          "name": "other shit",
-          "type": "application",
-          "solution": "Analytics",
-          "isExpert": false
-        }
-      ],
-      "certs": [
-        {
-          "name": "Certified Shit",
-          "org": "PMI"
-        },
-        {
-          "name": "other cert",
-          "org": "BSA"
-        }
-      ]
+
     },
     {
       "employeeId": 124,
@@ -57,33 +34,33 @@ const data: Employee[] = [
       "hasAnalytics": false,
       "hasTechnology": true,
       "certCount": 3,
-      "skills": [
-        {
-          "name": "Dumb Shit 1",
-          "type": "BA work",
-          "solution": "Technology",
-          "isExpert": true
-        },
-        {
-          "name": "other shit 2",
-          "type": "application",
-          "solution": "Technology",
-          "isExpert": false
-        }
-      ],
-      "certs": [
-        {
-          "name": "Certified Shit",
-          "org": "PMI"
-        },
-        {
-          "name": "other cert",
-          "org": "BSA"
-        },
-        {
-          "name": "scum master",
-          "org": "CSC"
-        }
-      ]
+      // "skills": [
+      //   {
+      //     "name": "Dumb Shit 1",
+      //     "type": "BA work",
+      //     "solution": "Technology",
+      //     "isExpert": true
+      //   },
+      //   {
+      //     "name": "other shit 2",
+      //     "type": "application",
+      //     "solution": "Technology",
+      //     "isExpert": false
+      //   }
+      // ],
+      // "certs": [
+      //   {
+      //     "name": "Certified Shit",
+      //     "org": "PMI"
+      //   },
+      //   {
+      //     "name": "other cert",
+      //     "org": "BSA"
+      //   },
+      //   {
+      //     "name": "scum master",
+      //     "org": "CSC"
+      //   }
+      // ]
     }
   ];

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { MatButtonToggleGroup } from '@angular/material';
 
 
 @Component({
@@ -10,6 +11,11 @@ import { Employee } from '../models/employee.model';
 export class EmployeeDetailComponent implements OnInit {
   
   @Input() employee:Employee
+  //@ViewChild('group') selections: MatButtonToggleGroup
+
+  getToggleValues(values: string[]){
+    console.log(values)
+  }
   
   constructor() { }
 

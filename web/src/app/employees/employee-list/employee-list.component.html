@@ -19,19 +19,25 @@
       <!-- Analytics Column -->
       <ng-container matColumnDef="hasAnalytics">
         <mat-header-cell *matHeaderCellDef> Analytics </mat-header-cell>
-        <mat-cell *matCellDef="let employee"> {{employee.hasAnalytics}} </mat-cell>
+        <mat-cell *matCellDef="let employee">
+            <mat-icon *ngIf="employee.hasAnalytics">check</mat-icon>
+        </mat-cell>
       </ng-container>
 
             <!-- Management Column -->
         <ng-container matColumnDef="hasManagement">
             <mat-header-cell *matHeaderCellDef> Management </mat-header-cell>
-            <mat-cell *matCellDef="let employee"> {{employee.hasManagement}} </mat-cell>
+            <mat-cell *matCellDef="let employee">
+              <mat-icon *ngIf="employee.hasManagement">check</mat-icon>
+            </mat-cell>
         </ng-container>
 
         <!-- Tech Column -->
         <ng-container matColumnDef="hasTechnology">
             <mat-header-cell *matHeaderCellDef> Technology </mat-header-cell>
-            <mat-cell *matCellDef="let employee"> {{employee.hasTechnology}} </mat-cell>
+            <mat-cell *matCellDef="let employee">
+              <mat-icon *ngIf="employee.hasTechnology">check</mat-icon>
+            </mat-cell>
         </ng-container>
 
         <!-- Cert Column -->
