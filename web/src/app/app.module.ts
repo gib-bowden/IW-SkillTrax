@@ -12,13 +12,23 @@ import { MaterialModule } from './material/material.module';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 import { EmployeeListService } from './employees/services/employee-list.service';
+import { ProfileComponent } from './profile/profile.component';
+import { SkillListComponent } from './profile/skill-list/skill-list.component';
+import { ListFilterDirectiveDirective } from './shared/list-filter-directive.directive';
+import { ListFilterDirective } from './shared/list-filter.directive';
+import { ListFilterButtonsComponent } from './shared/list-filter-buttons/list-filter-buttons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     EmployeeListComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    ProfileComponent,
+    SkillListComponent,
+    ListFilterDirectiveDirective,
+    ListFilterDirective,
+    ListFilterButtonsComponent
   ],
   imports: [
     BrowserModule,
