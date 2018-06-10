@@ -14,9 +14,7 @@ import { EmployeeDetailComponent } from './employees/employee-detail/employee-de
 import { EmployeeListService } from './employees/services/employee-list.service';
 import { ProfileComponent } from './profile/profile.component';
 import { SkillListComponent } from './profile/skill-list/skill-list.component';
-import { ListFilterDirectiveDirective } from './shared/list-filter-directive.directive';
-import { ListFilterDirective } from './shared/list-filter.directive';
-import { ListFilterButtonsComponent } from './shared/list-filter-buttons/list-filter-buttons.component';
+import { SkillService } from './employees/services/skill.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +24,6 @@ import { ListFilterButtonsComponent } from './shared/list-filter-buttons/list-fi
     EmployeeDetailComponent,
     ProfileComponent,
     SkillListComponent,
-    ListFilterDirectiveDirective,
-    ListFilterDirective,
-    ListFilterButtonsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +34,7 @@ import { ListFilterButtonsComponent } from './shared/list-filter-buttons/list-fi
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [EmployeeListService],
+  providers: [EmployeeListService, SkillService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
