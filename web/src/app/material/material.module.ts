@@ -26,7 +26,7 @@ import {
     MatTabsModule,
     MatCardModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
 
   ],
   exports: [

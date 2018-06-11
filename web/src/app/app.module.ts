@@ -15,6 +15,7 @@ import { EmployeeListService } from './employees/services/employee-list.service'
 import { ProfileComponent } from './profile/profile.component';
 import { SkillListComponent } from './profile/skill-list/skill-list.component';
 import { SkillService } from './employees/services/skill.service';
+import { CertListComponent } from './profile/cert-list/cert-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SkillService } from './employees/services/skill.service';
     EmployeeDetailComponent,
     ProfileComponent,
     SkillListComponent,
+    CertListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 export interface Cert {
+    id: number;
     name: string;
-    org: string;
+    categoryId: number;
+    category: string;
   }

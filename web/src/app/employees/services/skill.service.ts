@@ -11,6 +11,14 @@ export class SkillService {
   getSkills(): Skill[] {
     return data; 
   }
+
+  addEmployeeSkills(employeeId: number, skillIds: number[]) {
+    console.log(`empID: ${employeeId}, skills: ${skillIds}`)
+  }
+
+  getEmployeeSkills(employeeId: number): number[] {
+    return []; 
+  }
 }
 
 
