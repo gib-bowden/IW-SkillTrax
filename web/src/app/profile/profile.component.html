@@ -3,7 +3,14 @@
 </div>
 <mat-tab-group>
     <mat-tab label="Skills">
-        <skill-list></skill-list>
+        <div style="display: flex;">
+            <div style="width: 45%">
+                <skill-list></skill-list>
+            </div>
+            <div style="width: 45%">
+                <selected-skill-list></selected-skill-list>
+            </div>
+        </div>
     </mat-tab>
     <mat-tab label="Certifications">
         <cert-list></cert-list>

@@ -29,7 +29,7 @@ import {
     MatCardModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
 
   ],
   exports: [

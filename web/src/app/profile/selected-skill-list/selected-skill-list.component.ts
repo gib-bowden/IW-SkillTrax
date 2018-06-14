@@ -9,11 +9,12 @@ import { MatButtonToggleGroup, MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/materi
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'skill-list',
-  templateUrl: './skill-list.component.html',
-  styleUrls: ['./skill-list.component.css']
+  selector: 'selected-skill-list',
+  templateUrl: './selected-skill-list.component.html',
+  styleUrls: ['./selected-skill-list.component.css']
 })
-export class SkillListComponent implements OnInit {
+export class SelectedSkillListComponent implements OnInit {
+
   selectedSkillIds: string[];
   selectedSolutionIds: string[];
   employeeId: number;
@@ -110,4 +111,3 @@ export class SkillListComponent implements OnInit {
   }
 
 }
-
