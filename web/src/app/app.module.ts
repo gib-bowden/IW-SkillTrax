@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SkillListComponent } from './profile/skill-list/skill-list.component';
 import { SkillService } from './employees/services/skill.service';
 import { CertListComponent } from './profile/cert-list/cert-list.component';
+import { ProfileEmployeeDetailComponent } from './profile/employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CertListComponent } from './profile/cert-list/cert-list.component';
     ProfileComponent,
     SkillListComponent,
     CertListComponent,
+    ProfileEmployeeDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -22,4 +22,11 @@ export class EmployeeDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  tiles = [
+    {columnName: "Management", items: [{name:'dog walking', isExpert: false}], color: 'lightblue'},
+    {columnName: "Analytics", items: [{name:'tech stuff', isExpert: false},{name:'running', isExpert: false}], color: 'lightblue'},
+    {columnName: "Technology", items: [{name:'dog walking', isExpert: false}], color: 'lightblue'},
+    {columnName: "Certifications", items: [{name:'dog walking', isExpert: false}], color: 'lightblue'},
+  ];
+
 }
