@@ -18,6 +18,8 @@ import { SkillService } from './employees/services/skill.service';
 import { CertListComponent } from './profile/cert-list/cert-list.component';
 import { ProfileEmployeeDetailComponent } from './profile/employee-detail/employee-detail.component';
 import { SelectedSkillListComponent } from './profile/selected-skill-list/selected-skill-list.component';
+import { AuthService } from './auth/services/auth.service';
+import { AuthGuardService } from './auth/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { SelectedSkillListComponent } from './profile/selected-skill-list/select
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [EmployeeListService, SkillService],
+  providers: [EmployeeListService, SkillService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
