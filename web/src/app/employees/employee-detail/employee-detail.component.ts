@@ -13,6 +13,8 @@ export class EmployeeDetailComponent implements OnInit {
   @Input() employee:Employee
   //@ViewChild('group') selections: MatButtonToggleGroup
 
+  tiles: any
+
   getToggleValues(values: string[]){
     console.log(values)
   }
@@ -20,6 +22,15 @@ export class EmployeeDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.tiles = this.tileData
+    console.log(this.tiles)
   }
+  
+  tileData  = [
+    {columnName: "Sills", items: [{name:'dog walking', isExpert: false}], color: 'lightblue'},
+    {columnName: "Certifications", items: [{name:'tech stuff', isExpert: false},{name:'running', isExpert: false}], color: 'lightblue'},
+  ];
+
+
 
 }

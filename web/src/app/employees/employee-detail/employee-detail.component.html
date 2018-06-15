@@ -1,19 +1,4 @@
-<mat-button-toggle-group #group="matButtonToggleGroup" (change)="getToggleValues(group.value)" multiple>
-    <mat-button-toggle *ngIf="employee.hasAnalytics" value="analytics">
-      Analytics
-    </mat-button-toggle>
-    <mat-button-toggle *ngIf="employee.hasManagement" value="management">
-      Management
-    </mat-button-toggle>
-    <mat-button-toggle *ngIf="employee.hasTechnology" value="technology">
-      Technology
-    </mat-button-toggle>
-    <mat-button-toggle *ngIf="employee.certCount > 0" value="certs">
-      Certifications
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <div class="example-selected-value">Selected value: {{group.value}}{{employee.employeeId}}</div>
-  <mat-list>
+  <!-- <mat-list>
       <h3 matSubheader>Skills</h3>
       <mat-list-item>
          <mat-icon matListIcon>folder</mat-icon>
@@ -27,7 +12,22 @@
          <h4 matLine>{{employee.employeeId}}</h4>
          <p matLine class="demo-2"> {{employee.certCount}} </p>
       </mat-list-item>
-   </mat-list>
+   </mat-list> -->
+
+<div>
+   <mat-grid-list cols="12" rowHeight="100px">
+      <mat-grid-tile
+          *ngFor="let tile of tiles"
+          [colspan]="12/tiles.length"
+          [rowspan]="tile.items.length"
+          >
+          <mat-grid-tile-header>{{tile.columnName}}</mat-grid-tile-header>
+          <mat-list>
+            <mat-list-item *ngFor="let item of tile.items">{{item.name}}</mat-list-item>
+          </mat-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
 
-   <!-- *ngFor="let folder of folders" -->
+ 

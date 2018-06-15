@@ -12,13 +12,24 @@ import { MaterialModule } from './material/material.module';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employees/employee-detail/employee-detail.component';
 import { EmployeeListService } from './employees/services/employee-list.service';
+import { ProfileComponent } from './profile/profile.component';
+import { SkillListComponent } from './profile/skill-list/skill-list.component';
+import { SkillService } from './employees/services/skill.service';
+import { CertListComponent } from './profile/cert-list/cert-list.component';
+import { ProfileEmployeeDetailComponent } from './profile/employee-detail/employee-detail.component';
+import { SelectedSkillListComponent } from './profile/selected-skill-list/selected-skill-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     EmployeeListComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    ProfileComponent,
+    SkillListComponent,
+    CertListComponent,
+    ProfileEmployeeDetailComponent,
+    SelectedSkillListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +40,7 @@ import { EmployeeListService } from './employees/services/employee-list.service'
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [EmployeeListService],
+  providers: [EmployeeListService, SkillService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

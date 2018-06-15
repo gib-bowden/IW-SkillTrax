@@ -25,3 +25,7 @@
 .element-row.expanded {
   border-bottom-color: transparent;
 }
+
+employee-detail {
+  width: 100%;
+}

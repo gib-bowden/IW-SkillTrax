@@ -1,6 +1,8 @@
 export interface Skill {
-    name: string;
-    type: string;
-    solution: string;
-    isExpert: boolean;
-  }
+  id: number;
+  name: string;
+  typeId: number;
+  type: string;
+  solutionId: number;
+  solution: string;
+}
