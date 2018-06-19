@@ -7,6 +7,7 @@ import { SkillType } from '../../employees/models/skillType.model';
 import { SkillTypeService } from '../../employees/services/skill-type.service';
 import { MatButtonToggleGroup, MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { SkillListItem } from '../../employees/models/skill-list-item.model';
 
 @Component({
   selector: 'selected-skill-list',
@@ -15,42 +16,44 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SelectedSkillListComponent implements OnInit {
 
-  selectedSkillIds: string[];
+  selectedSkillIds: string[] = [];
   selectedSolutionIds: string[];
   employeeId: number;
-  skills: Skill[]
+  skills: SkillListItem[]
   solutions: Solution[]
-  filteredSkills: Skill[]
+  filteredSkills: SkillListItem[]
   skillTypes: SkillType[]
   listedSkillsTypeIds: string[];
   selectedTypeIds: string[];
-  @ViewChild('solutionFilter') solutionFilter: MatButtonToggleGroup
   filteredSkillTypes: SkillType[]; 
 
   constructor(private skillService: SkillService, private solutionService: SolutionService, private skillTypeService:SkillTypeService, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.solutions = this.solutionService.getSolutions() 
-    this.skills = this.skillService.getSkills(); 
+    //this.skills = this.skillService.getSkills(); 
     this.skillTypes = this.skillTypeService.getSkillTypes();
     this.employeeId = +this.route.snapshot.params['id']
-    this.getEmployeeSkills(this.employeeId);
-    this.filteredSkills = this.skills.slice(); //copy of skills, dynamic with filtering
+    this.getEmployeeSkills();
+    // this.filteredSkills = this.skills.slice(); //copy of skills, dynamic with filtering
     this.filterSkillTypeOptions();
 
   }
 
-  getEmployeeSkills(employeeId: number) {
-    this.selectedSkillIds = this.skillService.getEmployeeSkills(employeeId).map((id) => {
-      return id.toString();
+  getEmployeeSkills() {
+    this.skillService.getEmployeeSkills(this.employeeId).subscribe((skills) => {
+      this.skills = skills;
+      this.filteredSkills = skills.slice();
     })
   }
 
-  addSkills() {
-    let selectedCertsNum = this.selectedSkillIds.map((id) => {
+  removeSkills() {
+    let selectedSkillsNum = this.selectedSkillIds.map((id) => {
       return +id
     })
-    this.skillService.addEmployeeSkills(this.employeeId, selectedCertsNum)
+    this.skillService.removeEmployeeSkills(selectedSkillsNum).then((result) => {
+      location.reload(); 
+    })    
   }
 
   //Main filter function
@@ -62,7 +65,7 @@ export class SelectedSkillListComponent implements OnInit {
     if (areSolutions && areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
         return this.selectedSolutionIds.includes(skill.solutionId.toString()) 
-        && this.selectedTypeIds.includes(skill.typeId.toString())
+        && this.selectedTypeIds.includes(skill.skillTypeId.toString())
       })
     } else if (areSolutions && !areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
@@ -70,7 +73,7 @@ export class SelectedSkillListComponent implements OnInit {
       })
     } else if (!areSolutions && areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
-        return this.selectedTypeIds.includes(skill.typeId.toString())
+        return this.selectedTypeIds.includes(skill.skillTypeId.toString())
       })
     } else {
       this.filteredSkills = this.skills; 
@@ -87,7 +90,7 @@ export class SelectedSkillListComponent implements OnInit {
   getSolutionSkillTypeIds(selectedSolutions: string[]) {
     return this.skills.map((skill) => {
       if (selectedSolutions.includes(skill.solutionId.toString())) {
-        return skill.typeId.toString();
+        return skill.skillTypeId.toString();
       }       
     })
   }
@@ -106,7 +109,7 @@ export class SelectedSkillListComponent implements OnInit {
   searchSkills(searchValue:string) {
     this.clearFilters(); 
     this.filteredSkills = this.skills.filter((skill) => {
-      return skill.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+      return skill.skillName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
     })
   }
 

@@ -24,8 +24,8 @@
     <mat-card class="selection-list">
       <mat-card-content>
         <mat-selection-list [(ngModel)]="selectedSkillIds">
-          <mat-list-option *ngFor="let skill of filteredSkills" value={{skill.id}}>
-              {{skill.name}} {{skill.type}}
+          <mat-list-option *ngFor="let skill of filteredSkills" value={{skill.skillId}}>
+              {{skill.skillName}}
           </mat-list-option>
         </mat-selection-list>   
       </mat-card-content>

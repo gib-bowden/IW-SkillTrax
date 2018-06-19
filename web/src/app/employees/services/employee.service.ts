@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { config, Observable, of } from 'rxjs';
+import { take, toArray } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+//https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotnet-webapi/blob/master/TodoSPA/App/Scripts/Ctrls/todoListCtrl.js
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+  // private authContext = new AuthenticationContext(this.adal.config)
+  private url = 'https://localhost:44346/api/Employee'
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  getEmployee(employeeId: number): Employee {
-    return data.find((employee) => {
-      return employee.employeeId == employeeId
-    })
+  getEmployee(employeeId: number): Observable<any> {
+    return this.http.get(`${this.url}/${employeeId}`)
   }
+
 }
 
 const data: Employee[] = [
@@ -34,33 +40,5 @@ const data: Employee[] = [
     "hasAnalytics": false,
     "hasTechnology": true,
     "certCount": 3,
-    // "skills": [
-    //   {
-    //     "name": "Dumb Shit 1",
-    //     "type": "BA work",
-    //     "solution": "Technology",
-    //     "isExpert": true
-    //   },
-    //   {
-    //     "name": "other shit 2",
-    //     "type": "application",
-    //     "solution": "Technology",
-    //     "isExpert": false
-    //   }
-    // ],
-    // "certs": [
-    //   {
-    //     "name": "Certified Shit",
-    //     "org": "PMI"
-    //   },
-    //   {
-    //     "name": "other cert",
-    //     "org": "BSA"
-    //   },
-    //   {
-    //     "name": "scum master",
-    //     "org": "CSC"
-    //   }
-    // ]
   }
 ];

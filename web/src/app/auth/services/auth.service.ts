@@ -1,7 +1,11 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
 import { AdalService } from 'adal-angular4'
+import { promise } from 'protractor';
+import { resolve, reject } from 'q';
+import { UserService } from '../../employees/services/user.service';
+import { callbackify } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -16,32 +20,38 @@ export class AuthService {
     postLogoutRedirectUri: 'http://localhost:4200'
   }
 
-  constructor(private adal:AdalService) { 
+  constructor(private adal:AdalService, private userService:UserService) { 
     this.adal.init(this.config)
   }
 
   public isLoggedIn():boolean {
+    console.log(this.adal.userInfo)
     return this.adal.userInfo.authenticated;
+
  }
  
  public signout():void {
     this.adal.logOut();
  }
+
+  
  
  public startAuthentication():any {
     this.adal.login();
  }
+
  
- public getName():string {
-    return this.adal.userInfo.profile.getName
- }
- 
- public completeAuthentication():void {
+ public completeAuthentication():any {
+   return new Promise ((resolve, reject) => {
     this.adal.handleWindowCallback();
     this.adal.getUser().subscribe(user=> {
-    this.adal=user;
+    this.user = user;
     console.log(this.adal.userInfo);
-    var expireIn=user.profile.exp.newDate().getTime();
+    var expireIn=new Date(user.profile.exp).getTime();
+    console.log(expireIn);
+    this.userService.setCurrentUser(user.profile.unique_name)
+    resolve();
+   })
  });
  
  }

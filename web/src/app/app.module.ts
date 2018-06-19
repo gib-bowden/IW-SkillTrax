@@ -20,6 +20,9 @@ import { ProfileEmployeeDetailComponent } from './profile/employee-detail/employ
 import { SelectedSkillListComponent } from './profile/selected-skill-list/selected-skill-list.component';
 import { AuthService } from './auth/services/auth.service';
 import { AuthGuardService } from './auth/services/auth-guard.service';
+import { AuthCallbackComponent } from './auth/auth-callback/auth-callback.component';
+import { AdalService } from 'adal-angular4';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { AuthGuardService } from './auth/services/auth-guard.service';
     SkillListComponent,
     CertListComponent,
     ProfileEmployeeDetailComponent,
-    SelectedSkillListComponent
+    SelectedSkillListComponent,
+    AuthCallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +44,10 @@ import { AuthGuardService } from './auth/services/auth-guard.service';
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [EmployeeListService, SkillService, AuthService, AuthGuardService],
+  providers: [EmployeeListService, SkillService, AuthService, AuthGuardService, AdalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
