@@ -16,6 +16,10 @@ export class SkillService {
     return this.http.get('https://localhost:44346/api/Skill')
   }
 
+  getAvailableSkills(employeeId:number): Observable<any> {
+    return this.http.get(`https://localhost:44346/api/Employee/${employeeId}/AvailableSkills`)
+  }
+
   addEmployeeSkills(employeeId: number, skillIds: number[]) {
     return new Promise ((resolve, reject) => {
       skillIds.forEach(id => {

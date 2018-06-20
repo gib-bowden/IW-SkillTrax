@@ -32,16 +32,16 @@ export class SkillListComponent implements OnInit {
   constructor(private skillService: SkillService, private solutionService: SolutionService, private skillTypeService:SkillTypeService, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.solutions = this.solutionService.getSolutions() 
-    this.getSkills(); 
+    this.solutions = this.solutionService.getSolutions()  
     this.skillTypes = this.skillTypeService.getSkillTypes();
     this.employeeId = +this.route.snapshot.params['id']
+    this.getSkills();
     this.filterSkillTypeOptions();
   }
 
 
   getSkills() {
-    this.skillService.getSkills().subscribe((skills) => {
+    this.skillService.getAvailableSkills(this.employeeId).subscribe((skills) => {
       this.skills = skills
       this.filteredSkills = skills.slice();       
     })
@@ -53,6 +53,7 @@ export class SkillListComponent implements OnInit {
       return +id
     })
     this.skillService.addEmployeeSkills(this.employeeId, selectedSkillsNum)
+    location.reload(); 
   }
 
   //Main filter function

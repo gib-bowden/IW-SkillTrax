@@ -31,11 +31,9 @@ export class SelectedSkillListComponent implements OnInit {
 
   ngOnInit() {
     this.solutions = this.solutionService.getSolutions() 
-    //this.skills = this.skillService.getSkills(); 
     this.skillTypes = this.skillTypeService.getSkillTypes();
     this.employeeId = +this.route.snapshot.params['id']
     this.getEmployeeSkills();
-    // this.filteredSkills = this.skills.slice(); //copy of skills, dynamic with filtering
     this.filterSkillTypeOptions();
 
   }
