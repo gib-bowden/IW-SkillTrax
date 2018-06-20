@@ -1,23 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Skill } from '../models/skill.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { reject } from 'q';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SkillService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  getSkills(): Skill[] {
-    return data; 
+  getSkills(): Observable<any> {
+    return this.http.get('https://localhost:44346/api/Skill')
+  }
+
+  getAvailableSkills(employeeId:number): Observable<any> {
+    return this.http.get(`https://localhost:44346/api/Employee/${employeeId}/AvailableSkills`)
   }
 
   addEmployeeSkills(employeeId: number, skillIds: number[]) {
-    console.log(`empID: ${employeeId}, skills: ${skillIds}`)
+    return new Promise ((resolve, reject) => {
+      skillIds.forEach(id => {
+        this.http.post(`https://localhost:44346/api/Employee/${employeeId}/Skill/${id}`, {}).subscribe(); 
+      }); 
+      resolve(); 
+    })
   }
 
-  getEmployeeSkills(employeeId: number): number[] {
-    return []; 
+  removeEmployeeSkills(employeeSkillIds: number[]) {
+    return new Promise ((resolve, reject) => {
+      employeeSkillIds.forEach(id => {
+        this.http.delete(`https://localhost:44346/api/Employee/EmployeeSkill/${id}`).subscribe(result => {
+        }); 
+      }); 
+      resolve(true); 
+    })
+  }
+
+  getEmployeeSkills(employeeId: number): Observable<any> {
+    return this.http.get(`https://localhost:44346/api/Employee/${employeeId}/Skills`)
   }
 }
 

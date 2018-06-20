@@ -5,8 +5,10 @@ import { Solution } from '../../employees/models/solution.model';
 import { SolutionService } from '../../employees/services/solution.service';
 import { SkillType } from '../../employees/models/skillType.model';
 import { SkillTypeService } from '../../employees/services/skill-type.service';
-import { MatButtonToggleGroup, MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
+import { MatButtonToggleGroup } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { SkillListItem } from '../../employees/models/skill-list-item.model';
 
 @Component({
   selector: 'skill-list',
@@ -14,12 +16,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./skill-list.component.css']
 })
 export class SkillListComponent implements OnInit {
-  selectedSkillIds: string[];
+  employeeSkills: any;
+  selectedSkillIds: string[] = [];
   selectedSolutionIds: string[];
   employeeId: number;
-  skills: Skill[]
+  skills: SkillListItem[]
   solutions: Solution[]
-  filteredSkills: Skill[]
+  filteredSkills: SkillListItem[]
   skillTypes: SkillType[]
   listedSkillsTypeIds: string[];
   selectedTypeIds: string[];
@@ -29,27 +32,28 @@ export class SkillListComponent implements OnInit {
   constructor(private skillService: SkillService, private solutionService: SolutionService, private skillTypeService:SkillTypeService, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.solutions = this.solutionService.getSolutions() 
-    this.skills = this.skillService.getSkills(); 
+    this.solutions = this.solutionService.getSolutions()  
     this.skillTypes = this.skillTypeService.getSkillTypes();
     this.employeeId = +this.route.snapshot.params['id']
-    this.getEmployeeSkills(this.employeeId);
-    this.filteredSkills = this.skills.slice(); //copy of skills, dynamic with filtering
+    this.getSkills();
     this.filterSkillTypeOptions();
-
   }
 
-  getEmployeeSkills(employeeId: number) {
-    this.selectedSkillIds = this.skillService.getEmployeeSkills(employeeId).map((id) => {
-      return id.toString();
+
+  getSkills() {
+    this.skillService.getAvailableSkills(this.employeeId).subscribe((skills) => {
+      this.skills = skills
+      this.filteredSkills = skills.slice();       
     })
   }
+
 
   addSkills() {
-    let selectedCertsNum = this.selectedSkillIds.map((id) => {
+    let selectedSkillsNum = this.selectedSkillIds.map((id) => {
       return +id
     })
-    this.skillService.addEmployeeSkills(this.employeeId, selectedCertsNum)
+    this.skillService.addEmployeeSkills(this.employeeId, selectedSkillsNum)
+    location.reload(); 
   }
 
   //Main filter function
@@ -61,7 +65,7 @@ export class SkillListComponent implements OnInit {
     if (areSolutions && areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
         return this.selectedSolutionIds.includes(skill.solutionId.toString()) 
-        && this.selectedTypeIds.includes(skill.typeId.toString())
+        && this.selectedTypeIds.includes(skill.skillTypeId.toString())
       })
     } else if (areSolutions && !areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
@@ -69,7 +73,7 @@ export class SkillListComponent implements OnInit {
       })
     } else if (!areSolutions && areTypes) {
       this.filteredSkills = this.skills.filter((skill) => {
-        return this.selectedTypeIds.includes(skill.typeId.toString())
+        return this.selectedTypeIds.includes(skill.skillTypeId.toString())
       })
     } else {
       this.filteredSkills = this.skills; 
@@ -86,7 +90,7 @@ export class SkillListComponent implements OnInit {
   getSolutionSkillTypeIds(selectedSolutions: string[]) {
     return this.skills.map((skill) => {
       if (selectedSolutions.includes(skill.solutionId.toString())) {
-        return skill.typeId.toString();
+        return skill.skillTypeId.toString();
       }       
     })
   }
@@ -105,7 +109,7 @@ export class SkillListComponent implements OnInit {
   searchSkills(searchValue:string) {
     this.clearFilters(); 
     this.filteredSkills = this.skills.filter((skill) => {
-      return skill.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+      return skill.skillName.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
     })
   }
 

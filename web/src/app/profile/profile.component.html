@@ -4,12 +4,12 @@
 <mat-tab-group>
     <mat-tab label="Skills">
         <div style="display: flex;">
-            <div style="width: 45%">
-                <skill-list></skill-list>
-            </div>
-            <div style="width: 45%">
-                <selected-skill-list></selected-skill-list>
-            </div>
+            <mat-card mat-card-title="Skills" style="width: 45%; margin: 3%">
+                <skill-list mat-card-content></skill-list>
+            </mat-card>
+            <mat-card mat-card-title="Skills" style="width: 45%; margin: 3%">
+                <selected-skill-list mat-card-content></selected-skill-list>
+            </mat-card>
         </div>
     </mat-tab>
     <mat-tab label="Certifications">
