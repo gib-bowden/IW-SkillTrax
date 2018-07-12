@@ -4,9 +4,9 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-space"></span>
 
-  <span>
-    <p>Welcome {{name}}</p>
-    <button mat-button>Profile</button>
+
+  <div>
+    <button (click)="navToProfile()" mat-button>Profile</button>
     <button (click)="signout()" mat-button>Signout</button>
-  </span>
+  </div>
 </mat-toolbar>

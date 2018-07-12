@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SkillService } from '../../employees/services/skill.service';
 import { Skill } from '../../employees/models/skill.model';
 import { Solution } from '../../employees/models/solution.model';
@@ -25,7 +25,8 @@ export class SelectedSkillListComponent implements OnInit {
   skillTypes: SkillType[]
   listedSkillsTypeIds: string[];
   selectedTypeIds: string[];
-  filteredSkillTypes: SkillType[]; 
+  filteredSkillTypes: SkillType[];
+  @Output() updateSkillsEvent = new EventEmitter() 
 
   constructor(private skillService: SkillService, private solutionService: SolutionService, private skillTypeService:SkillTypeService, private route:ActivatedRoute) { }
 
@@ -49,9 +50,14 @@ export class SelectedSkillListComponent implements OnInit {
     let selectedSkillsNum = this.selectedSkillIds.map((id) => {
       return +id
     })
-    this.skillService.removeEmployeeSkills(selectedSkillsNum).then((result) => {
-      location.reload(); 
-    })    
+    this.skillService.removeEmployeeSkills(selectedSkillsNum).subscribe(
+      result => {},
+      error => console.log(error),
+      () => {
+        this.getEmployeeSkills()
+        this.updateSkillsEvent.emit("updateAvailableSkills")
+      }
+    )  
   }
 
   //Main filter function

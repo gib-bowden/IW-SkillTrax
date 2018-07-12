@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Skill } from '../models/skill.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { reject } from 'q';
-import { resolve } from 'dns';
+import { Observable, forkJoin } from 'rxjs';
+import { first, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +29,11 @@ export class SkillService {
   }
 
   removeEmployeeSkills(employeeSkillIds: number[]) {
-    return new Promise ((resolve, reject) => {
+    let batch = []; 
       employeeSkillIds.forEach(id => {
-        this.http.delete(`https://localhost:44346/api/Employee/EmployeeSkill/${id}`).subscribe(result => {
-        }); 
-      }); 
-      resolve(true); 
-    })
+        batch.push(this.http.delete(`https://localhost:44346/api/Employee/EmployeeSkill/${id}`).pipe(first()))
+      });
+      return forkJoin(...batch)
   }
 
   getEmployeeSkills(employeeId: number): Observable<any> {

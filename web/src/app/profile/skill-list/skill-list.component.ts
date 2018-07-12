@@ -40,7 +40,7 @@ export class SkillListComponent implements OnInit {
   }
 
 
-  getSkills() {
+  public getSkills() {
     this.skillService.getAvailableSkills(this.employeeId).subscribe((skills) => {
       this.skills = skills
       this.filteredSkills = skills.slice();       
