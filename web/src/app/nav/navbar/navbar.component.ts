@@ -13,18 +13,19 @@ import { AdalService } from 'adal-angular4';
 })
 export class NavbarComponent implements OnInit {
 
-  name:string
+  //name? = this.authService.user
 
   constructor(private adal:AdalService, private userService:UserService, private authService:AuthService) { }
 
   ngOnInit() {
-    // this.authService.getUser().then((user) => {
-    //   console.log(user);
-    // });
   }
 
   signout():void {
     this.authService.signout(); 
+  }
+
+  navToProfile() {
+    console.log(this.userService.getCurrentUser())
   }
 
 }

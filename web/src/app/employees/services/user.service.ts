@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService { 
 
   currentUser:any
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  setCurrentUser(uniqueId: string) {
-    this.currentUser = data.find((user) => {
-      return user.AdUniqueIdentifier == uniqueId
+  // setCurrentUser(uniqueId: string) {
+  //   this.currentUser = data.find((user) => {
+  //     return user.AdUniqueIdentifier == uniqueId
+  //   })
+  //   console.log(this.currentUser)
+  //   sessionStorage.setItem('currentUser', this.currentUser);
+  // }
+
+  setCurrentUser(adUniqueId: string) {
+    this.http.get(`https://localhost:44346/api/Employee/ActiveDirectoryId/${adUniqueId}`).subscribe((user) => {
+      console.log(user)
+      sessionStorage.setItem('currentUser', user.toString());
     })
-    console.log(this.currentUser)
   }
 
   getCurrentUser() {
-    return this.currentUser
+    sessionStorage.getItem('currentUser')
   }
 }
 

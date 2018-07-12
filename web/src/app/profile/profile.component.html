@@ -8,7 +8,7 @@
                 <skill-list mat-card-content></skill-list>
             </mat-card>
             <mat-card mat-card-title="Skills" style="width: 45%; margin: 3%">
-                <selected-skill-list mat-card-content></selected-skill-list>
+                <selected-skill-list mat-card-content (updateSkills)="updateSkills($event)"></selected-skill-list>
             </mat-card>
         </div>
     </mat-tab>

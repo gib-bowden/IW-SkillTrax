@@ -40,6 +40,10 @@ export class AuthService {
     this.adal.login();
  }
 
+ public getUser() {
+   return this.user
+ }
+
  
  public completeAuthentication():any {
    return new Promise ((resolve, reject) => {
